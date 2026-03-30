@@ -1,15 +1,22 @@
+import { ReactNode } from "react";
+
 interface GlassCardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
+  variant?: "default" | "glow" | "accent";
 }
 
-const GlassCard = ({ children, className = "" }: GlassCardProps) => (
-  <div
-    className={`rounded-xl border border-foreground/10 backdrop-blur-md p-6 ${className}`}
-    style={{ background: "var(--gradient-card)" }}
-  >
-    {children}
-  </div>
-);
+const GlassCard = ({ children, className = "", variant = "default" }: GlassCardProps) => {
+  const variantClass =
+    variant === "glow" ? "glass-card-glow" :
+    variant === "accent" ? "glass-card-accent" :
+    "glass-card";
+
+  return (
+    <div className={`rounded-2xl p-6 ${variantClass} ${className}`}>
+      {children}
+    </div>
+  );
+};
 
 export default GlassCard;
