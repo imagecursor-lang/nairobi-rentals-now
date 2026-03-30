@@ -47,3 +47,18 @@
     font-family: 'Poppins', sans-serif;
   }
 }
+
+@media print {
+  .print\:hidden {
+    display: none !important;
+  }
+  section {
+    min-height: auto !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
