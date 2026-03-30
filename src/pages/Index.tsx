@@ -1,19 +1,36 @@
 import PitchSection from "@/components/PitchSection";
 import SectionNav from "@/components/SectionNav";
 import GlassCard from "@/components/GlassCard";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { motion } from "framer-motion";
+import { Download } from "lucide-react";
 
-const StatBox = ({ value, label }: { value: string; label: string }) => (
+const StatBox = ({ end, suffix, label }: { end: number; suffix: string; label: string }) => (
   <GlassCard className="text-center flex-1 min-w-[200px]">
-    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">{value}</div>
+    <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+      <AnimatedCounter end={end} suffix={suffix} decimals={end % 1 !== 0 ? 1 : 0} />
+    </div>
     <div className="text-sm text-muted-foreground">{label}</div>
   </GlassCard>
 );
+
+const handleExportPDF = () => {
+  window.print();
+};
 
 const Index = () => {
   return (
     <div className="bg-background text-foreground">
       <SectionNav />
+
+      {/* PDF Export Button */}
+      <button
+        onClick={handleExportPDF}
+        className="fixed bottom-8 left-8 z-50 flex items-center gap-2 px-4 py-3 rounded-full font-semibold text-sm bg-secondary text-secondary-foreground border border-border/50 hover:bg-secondary/80 transition-all hover:scale-105 print:hidden"
+      >
+        <Download className="w-4 h-4" />
+        <span className="hidden sm:inline">Export PDF</span>
+      </button>
 
       {/* SECTION 1 — HERO */}
       <PitchSection id="hero" backgroundImage="https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/0761815da1c3116fc16abf95ed6ddb5e9e156865.jpg">
@@ -33,17 +50,31 @@ const Index = () => {
           <p className="text-lg md:text-xl text-foreground/70 mb-12 max-w-2xl mx-auto">
             The Digital Infrastructure for Africa's $1.1B Rental Market
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "88.8% tenants",
-              "~1.4M rental households",
-              "$1.1B annual market",
-              "95% managed manually",
-            ].map((item) => (
-              <GlassCard key={item} className="px-5 py-3">
-                <span className="text-sm font-medium">{item}</span>
-              </GlassCard>
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+            <GlassCard className="px-4 py-4 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">
+                <AnimatedCounter end={88.8} suffix="%" decimals={1} />
+              </div>
+              <div className="text-xs text-muted-foreground mt-1">Tenants</div>
+            </GlassCard>
+            <GlassCard className="px-4 py-4 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">
+                <AnimatedCounter end={1.4} suffix="M" decimals={1} prefix="~" />
+              </div>
+              <div className="text-xs text-muted-foreground mt-1">Rental Households</div>
+            </GlassCard>
+            <GlassCard className="px-4 py-4 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">
+                <AnimatedCounter end={1.1} suffix="B" decimals={1} prefix="$" />
+              </div>
+              <div className="text-xs text-muted-foreground mt-1">Annual Market</div>
+            </GlassCard>
+            <GlassCard className="px-4 py-4 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-primary">
+                <AnimatedCounter end={95} suffix="%" />
+              </div>
+              <div className="text-xs text-muted-foreground mt-1">Managed Manually</div>
+            </GlassCard>
           </div>
         </div>
       </PitchSection>
@@ -100,7 +131,8 @@ const Index = () => {
             </table>
           </GlassCard>
           <div className="mt-8 text-2xl md:text-3xl font-bold">
-            Total Monthly Rent Economy: <span className="text-primary">KSh 12B</span>
+            Total Monthly Rent Economy: <span className="text-primary">KSh <AnimatedCounter end={12} suffix="B" />
+            </span>
           </div>
         </div>
       </PitchSection>
@@ -110,9 +142,9 @@ const Index = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-12">Market Gap</h2>
           <div className="flex flex-wrap justify-center gap-6">
-            <StatBox value="77.1%" label="Apartments" />
-            <StatBox value="15%" label="Short-term Rentals" />
-            <StatBox value="10%" label="Annual Rent Growth" />
+            <StatBox end={77.1} suffix="%" label="Apartments" />
+            <StatBox end={15} suffix="%" label="Short-term Rentals" />
+            <StatBox end={10} suffix="%" label="Annual Rent Growth" />
           </div>
         </div>
       </PitchSection>
@@ -152,13 +184,15 @@ const Index = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Revenue Model</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { tier: "Small", units: "1–10 units", price: "$5/mo", color: "text-foreground" },
-              { tier: "Medium", units: "11–50 units", price: "$25/mo", color: "text-primary" },
-              { tier: "Large", units: "50+ units", price: "$75/mo", color: "text-accent" },
+              { tier: "Small", units: "1–10 units", price: 5, color: "text-foreground" },
+              { tier: "Medium", units: "11–50 units", price: 25, color: "text-primary" },
+              { tier: "Large", units: "50+ units", price: 75, color: "text-accent" },
             ].map((plan) => (
               <GlassCard key={plan.tier} className={`text-center ${plan.tier === "Medium" ? "border-primary/30 scale-105" : ""}`}>
                 <div className="text-xs uppercase tracking-widest text-muted-foreground mb-2">{plan.tier} Landlord</div>
-                <div className={`text-3xl font-bold ${plan.color} mb-1`}>{plan.price}</div>
+                <div className={`text-3xl font-bold ${plan.color} mb-1`}>
+                  <AnimatedCounter end={plan.price} prefix="$" suffix="/mo" />
+                </div>
                 <div className="text-sm text-muted-foreground">{plan.units}</div>
               </GlassCard>
             ))}
@@ -201,9 +235,13 @@ const Index = () => {
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-8">Additional Revenue Stream</h2>
           <GlassCard className="border-accent/20">
-            <div className="text-6xl md:text-7xl font-bold text-accent mb-4">1%</div>
+            <div className="text-6xl md:text-7xl font-bold text-accent mb-4">
+              <AnimatedCounter end={1} suffix="%" />
+            </div>
             <p className="text-xl text-foreground/80 mb-2">Transaction fee on every rent payment</p>
-            <div className="text-3xl font-bold text-primary mt-6">$1.3M/year</div>
+            <div className="text-3xl font-bold text-primary mt-6">
+              <AnimatedCounter end={1.3} prefix="$" suffix="M/year" decimals={1} />
+            </div>
             <p className="text-sm text-muted-foreground">potential from transaction fees alone</p>
           </GlassCard>
         </div>
@@ -215,7 +253,9 @@ const Index = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-8">Valuation</h2>
           <div className="inline-block rounded-2xl p-10 border border-primary/30" style={{ background: "var(--gradient-card)" }}>
             <p className="text-sm uppercase tracking-widest text-muted-foreground mb-3">Seed Valuation</p>
-            <div className="text-6xl md:text-8xl font-bold text-primary">$10M</div>
+            <div className="text-6xl md:text-8xl font-bold text-primary">
+              <AnimatedCounter end={10} prefix="$" suffix="M" />
+            </div>
           </div>
         </div>
       </PitchSection>
@@ -234,15 +274,17 @@ const Index = () => {
               </thead>
               <tbody>
                 {[
-                  ["Product Development", "40%"],
-                  ["Sales & Marketing", "30%"],
-                  ["Operations", "15%"],
-                  ["Legal & Compliance", "10%"],
-                  ["Reserve", "5%"],
+                  ["Product Development", 40],
+                  ["Sales & Marketing", 30],
+                  ["Operations", 15],
+                  ["Legal & Compliance", 10],
+                  ["Reserve", 5],
                 ].map(([item, pct]) => (
-                  <tr key={item} className="border-b border-foreground/5">
+                  <tr key={item as string} className="border-b border-foreground/5">
                     <td className="py-3 px-4 font-medium">{item}</td>
-                    <td className="py-3 px-4 text-right font-semibold text-primary">{pct}</td>
+                    <td className="py-3 px-4 text-right font-semibold text-primary">
+                      <AnimatedCounter end={pct as number} suffix="%" />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -272,7 +314,7 @@ const Index = () => {
       </PitchSection>
 
       {/* FOOTER */}
-      <footer className="bg-background border-t border-border/30 py-8 text-center text-sm text-muted-foreground">
+      <footer className="bg-background border-t border-border/30 py-8 text-center text-sm text-muted-foreground print:hidden">
         <div className="flex flex-wrap justify-center gap-6">
           <span>RentFlow</span>
           <span>hello@rentflow.co.ke</span>
