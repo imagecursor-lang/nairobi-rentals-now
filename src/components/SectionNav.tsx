@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const sections = [
@@ -19,6 +19,19 @@ const SectionNav = () => {
   const [active, setActive] = useState(0);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const getCurrentSectionIndex = useCallback(() => {
+    const scrollPos = window.scrollY + window.innerHeight / 2;
+
+    for (let i = 0; i < sections.length; i += 1) {
+      const el = document.getElementById(sections[i].id);
+      if (el && scrollPos >= el.offsetTop && scrollPos < el.offsetTop + el.offsetHeight) {
+        return i;
+      }
+    }
+
+    return active;
+  }, [active]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPos = window.scrollY + window.innerHeight / 2;
@@ -36,10 +49,36 @@ const SectionNav = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToNext = () => {
-    const next = Math.min(active + 1, sections.length - 1);
-    document.getElementById(sections[next].id)?.scrollIntoView({ behavior: "smooth" });
-  };
+  const scrollToSection = useCallback((index: number) => {
+    const clampedIndex = Math.max(0, Math.min(index, sections.length - 1));
+    const target = document.getElementById(sections[clampedIndex].id);
+    target?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
+  const scrollToNext = useCallback(() => {
+    const current = getCurrentSectionIndex();
+    scrollToSection(current + 1);
+  }, [getCurrentSectionIndex, scrollToSection]);
+
+  const scrollToPrev = useCallback(() => {
+    const current = getCurrentSectionIndex();
+    scrollToSection(current - 1);
+  }, [getCurrentSectionIndex, scrollToSection]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+        event.preventDefault();
+        scrollToNext();
+      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+        event.preventDefault();
+        scrollToPrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [scrollToNext, scrollToPrev]);
 
   return (
     <>

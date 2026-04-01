@@ -24,12 +24,12 @@ const Index = () => {
 
       {/* ═══════════════════════ SECTION 1 — HERO ═══════════════════════ */}
       <PitchSection id="hero" backgroundImage="https://kimi-web-img.moonshot.cn/img/www.shutterstock.com/0761815da1c3116fc16abf95ed6ddb5e9e156865.jpg" orbColor="hsla(155,100%,45%,0.12)">
-        <div className="text-center max-w-5xl mx-auto">
+        <div className="text-center max-w-4xl mx-auto space-y-4 md:space-y-6 lg:space-y-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="section-badge mb-10"
+            className="section-badge mb-6 md:mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
             Investor Pitch — Series A Opportunity
@@ -39,7 +39,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold leading-[0.95] mb-3 md:mb-5"
             style={{ fontFamily: "var(--font-display)" }}
           >
             The Future of
@@ -53,13 +53,13 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.7 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-14 leading-relaxed"
+            className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8 leading-relaxed"
           >
             Building the digital infrastructure for a <span className="text-foreground font-semibold">$1.1 Billion</span> market
             that's <span className="text-foreground font-semibold">95% untouched</span> by technology.
           </motion.p>
 
-          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 max-w-3xl mx-auto">
             {[
               { end: 88.8, suffix: "%", label: "Households are Tenants", decimals: 1 },
               { end: 1.4, suffix: "M", label: "Rental Households", decimals: 1, prefix: "~" },
@@ -67,8 +67,8 @@ const Index = () => {
               { end: 95, suffix: "%", label: "Still Manual", decimals: 0 },
             ].map((stat) => (
               <StaggerItem key={stat.label}>
-                <GlassCard variant="glow" className="py-6 text-center">
-                  <div className="stat-number text-3xl md:text-4xl text-gradient-primary mb-2">
+                <GlassCard variant="glow" className="py-3 md:py-4 text-center">
+                  <div className="stat-number text-xl md:text-2xl lg:text-3xl text-gradient-primary mb-1">
                     <AnimatedCounter end={stat.end} suffix={stat.suffix} decimals={stat.decimals} prefix={stat.prefix} />
                   </div>
                   <div className="text-xs text-muted-foreground uppercase tracking-wider">{stat.label}</div>
@@ -209,7 +209,7 @@ const Index = () => {
 
       {/* ═══════════════════════ SECTION 5 — SOLUTION ═══════════════════════ */}
       <PitchSection id="solution" backgroundImage="https://kimi-web-img.moonshot.cn/img/cloudrentalmanager.com/2f62ed7c37c5e6a84bb6e7055c3acb241cb52224.png" orbColor="hsla(200,100%,50%,0.1)" orbPosition="bottom-left">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <FadeSlideIn>
             <div className="text-center mb-14">
               <div className="section-badge mb-6">Our Product</div>
@@ -278,7 +278,7 @@ const Index = () => {
 
       {/* ═══════════════════════ SECTION 6 — REVENUE MODEL ═══════════════════════ */}
       <PitchSection id="revenue" backgroundImage="https://kimi-web-img.moonshot.cn/img/www.safaricom.co.ke/32245cca249e3895b3e29e2a7002c3f1d742ee4c.png" orbColor="hsla(32,100%,55%,0.1)">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <FadeSlideIn>
             <div className="text-center mb-14">
               <div className="section-badge mb-6">Business Model</div>
@@ -363,7 +363,7 @@ const Index = () => {
 
       {/* ═══════════════════════ SECTION 8 — EXTRA REVENUE ═══════════════════════ */}
       <PitchSection id="extra" orbColor="hsla(32,100%,55%,0.12)" orbPosition="bottom-left">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <FadeSlideIn>
             <div className="section-badge mb-6">Bonus Revenue</div>
             <h2 className="text-4xl md:text-6xl font-bold mb-14" style={{ fontFamily: "var(--font-display)" }}>
@@ -393,7 +393,7 @@ const Index = () => {
 
       {/* ═══════════════════════ SECTION 9 — VALUATION ═══════════════════════ */}
       <PitchSection id="valuation" backgroundImage="https://kimi-web-img.moonshot.cn/img/img.freepik.com/2fcc6a90d004a3d6a9a4e0d9c653a624e12d48f6.jpg" orbColor="hsla(155,100%,45%,0.15)" orbPosition="center">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <FadeSlideIn>
             <div className="section-badge mb-6">Company Valuation</div>
             <h2 className="text-4xl md:text-6xl font-bold mb-12" style={{ fontFamily: "var(--font-display)" }}>

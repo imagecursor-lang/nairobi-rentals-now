@@ -24,7 +24,7 @@ const PitchSection = ({ id, backgroundImage, children, orbColor = "hsla(155,100%
     <section
       id={id}
       ref={ref}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-screen flex items-center justify-center overflow-hidden snap-start snap-always"
       style={{
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundSize: "cover",
@@ -57,7 +57,7 @@ const PitchSection = ({ id, backgroundImage, children, orbColor = "hsla(155,100%
       />
 
       <motion.div
-        className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-10 py-24"
+        className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-8 lg:py-10"
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
