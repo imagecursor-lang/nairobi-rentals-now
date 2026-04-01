@@ -142,7 +142,7 @@ const SectionNav = () => {
       <header className="fixed top-[2px] left-0 right-0 z-50 backdrop-blur-xl bg-background/40 border-b border-foreground/5 print:hidden">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <span className="text-sm font-bold tracking-widest uppercase" style={{ fontFamily: "var(--font-display)" }}>
-            <span className="text-gradient-primary">Rent</span>Flow
+            DigiBoma
           </span>
           <div className="hidden md:flex items-center gap-1 text-[10px] text-muted-foreground">
             <span className="text-primary font-bold">{String(active + 1).padStart(2, '0')}</span>

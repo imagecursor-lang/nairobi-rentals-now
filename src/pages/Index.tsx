@@ -217,7 +217,7 @@ const Index = () => {
                 One Platform.<br /><span className="text-gradient-primary">Everything Managed.</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-                RentFlow replaces spreadsheets, paper, and WhatsApp with a single intelligent system.
+                DigiBoma replaces spreadsheets, paper, and WhatsApp with a single intelligent system.
               </p>
             </div>
           </FadeSlideIn>
@@ -511,7 +511,7 @@ const Index = () => {
       {/* FOOTER */}
       <footer className="bg-background border-t border-border/30 py-10 text-center print:hidden">
         <div className="flex flex-wrap justify-center gap-8 text-sm text-muted-foreground">
-          <span className="font-bold text-foreground">RentFlow</span>
+          <span className="font-bold text-foreground">DigiBoma</span>
           <span>hello@rentflow.co.ke</span>
           <span>+254 700 000 000</span>
         </div>
